@@ -21,10 +21,15 @@ router.get('/',(req,res) => {
 
 router.post('/',(req,res) => {
   const post = req.body
-  console.log(post)
-  db.addPost({title: post.title, paragraphs: JSON.stringify(post.paragraphs), date_created: new Date()})
+  post.paragraphs = JSON.stringify(post.paragraphs)
+  post.date_created = new Date()
+
+  db.addPost(post)
     .then(id => {
-      res.json({ id: id})
+      db.getPost(id[0])
+      .then(newPost => {
+        res.json(toCamelCase(newPost))
+      })
     })
 })
 

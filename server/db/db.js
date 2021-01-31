@@ -5,11 +5,20 @@ function getPosts(db = connection) {
 }
 
 function addPost(post, db = connection) {
-  return db('posts').insert(post)
-    .then(ids => ids[0])
+  return db('posts')
+  .insert(post)
+   
 }
+
+function getPost(id, db = connection) {
+  return db('posts')
+    .where('posts.id', id)
+    .first()
+}
+
 
 module.exports = {
   getPosts,
-  addPost
+  addPost,
+  getPost
 }
