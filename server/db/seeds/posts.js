@@ -7,8 +7,8 @@ exports.seed = (knex) => {
         {
           id: 126,
           title: 'The beginning of an idea',
-          comment_count: 0,
-          date_created: new Date(Date.now()),
+          commentCount: 0,
+          dateCreated: new Date(Date.now()),
           paragraphs: JSON.stringify([
             'Day after day the spider waited, head­down, for an idea to come to her. Hour by hour she sat motionless, deep in thought. Having promised Wilbur that she would save his life, she was determined to keep her promise. Charlotte was naturally patient. She knew from experience that if she waited long enough, a fly would come to her web; and she felt sure that if she thought long enough about Wilbur\'s problem, an idea would come to her mind. Finally, one morning toward the middle of July, the idea came. "Why, how perfectly simple!" she said to herself. "The way to save Wilbur\'s life  is  to  play a trick on Zuckerman. If I can fool a bug," thought Charlotte, "I can surely fool a man. People are not as smart as bugs."',
             'Wilbur walked into his yard just at that moment.',
@@ -22,8 +22,8 @@ exports.seed = (knex) => {
         {
           id: 125,
           title: 'Bad News',
-          comment_count: 1,
-          date_created: new Date(Date.now()),
+          commentCount: 1,
+          dateCreated: new Date(Date.now()),
           paragraphs: JSON.stringify([
             'Wilbur liked Charlotte better and better each day. Her campaign against insects seemed sensible and useful. Hardly anybody around the farm had a good word to say for a fly. Flies spent their time pestering others. The cows hated them. The horses detested them. The sheep loathed them. Mr. and Mrs. Zuckerman were always complaining about them, and putting up screens.',
             'Wilbur admired the way Charlotte managed. He was particularly glad that she always put her victim to sleep before eating it.',
@@ -40,8 +40,8 @@ exports.seed = (knex) => {
         {
           id: 123,
           title: 'My first encounter with Wilber',
-          comment_count: 2,
-          date_created: new Date(Date.now()),
+          commentCount: 2,
+          dateCreated: new Date(Date.now()),
           paragraphs: JSON.stringify([
             '"My name is Charlotte."',
             '"Charlotte what?" asked Wilbur, eagerly.',
@@ -59,8 +59,8 @@ exports.seed = (knex) => {
         {
           id: 124,
           title: 'Summer Days',
-          date_created: new Date(Date.now()),
-          comment_count: 0,
+          dateCreated: new Date(Date.now()),
+          commentCount: 0,
           paragraphs: JSON.stringify([
             'The early summer days on a farm are the happiest and fairest days of the year. Lilacs bloom and make the air sweet, and then fade. Apple blossoms come with the lilacs, and the bees visit around among the apple trees. The days grow warm and soft. School ends, and children have time to play and to fish for trouts in the brook. Avery often brought a trout home in his pocket, warm and stiff and ready to be fried for supper.',
             'Now that school was over, Fern visited the barn almost every day, to sit quietly on her stool. The animals treated her as an equal. The sheep lay calmly at her feet.',

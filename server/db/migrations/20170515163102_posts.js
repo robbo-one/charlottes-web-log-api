@@ -2,8 +2,8 @@ exports.up = (knex) => {
   return knex.schema.createTable('Posts', (table) => {
     table.increments().primary()
     table.string('title')
-    table.date('date_created')
-    table.integer('comment_count').defaultsTo(0)
+    table.date('dateCreated')
+    table.integer('commentCount').defaultsTo(0)
     table.string('paragraphs')
   })
 }

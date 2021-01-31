@@ -5,6 +5,21 @@ function getBlogPosts () {
     return db('posts').select()
 }
 
+function addPost(post) {
+    post.paragraphs = JSON.stringify(post.paragraphs)
+    return db('posts').insert(post)
+      .then(posts => posts[0])
+  }
+
+  function updatePost(id, post) {
+    return db('posts')
+    .where("id", id)
+    .update({post: post})
+      .then(post => post[0])
+  }
+
 module.exports = {
-    getBlogPosts
+    getBlogPosts,
+    addPost,
+    updatePost
 }
