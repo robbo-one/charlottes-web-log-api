@@ -31,5 +31,20 @@ router.post('/', (req, res) => {
   })
 })
 
+router.patch('/:id', (req, res) => {
+  const id = req.params.id
+  const post = req.body
+  // console.log(post)
+  db.updateBlogPost(id, post.title, JSON.stringify(post.paragraphs))
+  .then(() => {
+    db.getPost(id)
+    .then(p => {
+      // console.log(p)
+      p.paragraphs = JSON.parse(p.paragraphs)
+      res.json(camelCase(p))
+    })
+  })
+})
+
 module.exports = router
 

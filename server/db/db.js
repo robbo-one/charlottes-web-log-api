@@ -16,9 +16,16 @@ function getPost (id) {
   .first()
 }
 
+function updateBlogPost (id, title, paragraphs) {
+  return db('posts')
+  .where('id', id)
+  .update({title : title, paragraphs : paragraphs})
+}
+
 module.exports = {
   getPosts,
   addPost,
-  getPost
+  getPost,
+  updateBlogPost
 }
 
