@@ -14,10 +14,10 @@ function getPosts (db = connection) {
       return posts.map(post => {
         post.dateCreated = post.date_created
         delete post.date_created
+        post.paragraphs = JSON.parse(post.paragraphs)
+        post.commentCount = post.comment_count
+        delete post.comment_count
         return post
       })
     })
-}
-
-
-
+  }
