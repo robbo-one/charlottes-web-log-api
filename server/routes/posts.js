@@ -19,12 +19,13 @@ router.get('/',(req,res) => {
   })
 })
 
-// router.get('/',(req,res) => { 
-//   db.getPosts ()
-//     .then (posts => {
-//       console.log(posts)
-//       res.json(toCamelCase(posts))
-//     })
-//   })
+router.post('/',(req,res) => {
+  const post = req.body
+  console.log(post)
+  db.addPost({title: post.title, paragraphs: JSON.stringify(post.paragraphs), date_created: new Date()})
+    .then(id => {
+      res.json({ id: id})
+    })
+})
 
 module.exports = router
