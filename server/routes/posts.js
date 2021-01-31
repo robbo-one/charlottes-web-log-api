@@ -16,7 +16,15 @@ router.get('/', (req,res) => {
     })
 })
 
-
+router.post('/', (req,res) => {
+  db.addPost(req.body)
+    .then(id => {
+    db.getPostById(id)
+    .then (post => {
+    res.json(post) //pass Post to client
+    })
+})
+})
 
 
 
