@@ -13,4 +13,19 @@ router.get('/', (req, res) => {
     })
 })
 
+router.post('/', (req, res) => {
+  const paragraph = JSON.stringify(req.body.paragraphs)
+ 
+  const post = {
+    title: req.body.title,
+    paragraphs: paragraph
+  }
+  console.log(post)
+  db.addPost(post)
+    .then(id => {     
+      res.json({ id: id })
+    })
+})
+
+
 module.exports = router
