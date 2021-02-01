@@ -18,18 +18,25 @@ function getPost(id, db = connection) {
 
 function updatePost(id,title,paragraphs, db = connection) {
   return db('posts')
-  .where('posts.id', id)
+  .where('Posts.id', id)
   .update({
     title: title,
     paragraphs: paragraphs
   })
- 
 }
+
+function deletePost(id, db = connection){
+  return db('posts')
+  .where('Posts.id', id)
+  .delete()
+}
+
 
 
 module.exports = {
   getPosts,
   addPost,
   getPost,
-  updatePost
+  updatePost,
+  deletePost
 }
