@@ -9,11 +9,11 @@ module.exports = {
   getPostById,
   changePostForApi,
   changePostForDatabase,
-  updatePost
+  updatePost,
+  deletePost
 }
 
 //A function to get a list of blog posts.  Will return an array of objects.
-
 function getPosts (db = connection) {
   return db('posts').select()
     .then(posts => {
@@ -46,9 +46,7 @@ function getPosts (db = connection) {
   function updatePost(id, post, db = connection) {
     post = changePostForDatabase(post)
     return db('posts').update(post).where('posts.id', id)//jumps back to api
-    
-
-  }
+      }
   
     function changePostForDatabase (post) {
       post.date_created = post.dateCreated
@@ -58,6 +56,22 @@ function getPosts (db = connection) {
       delete post.commentCount
       return post //jumps to line 48
     }
+
+
+    function deletePost(id, db = connection) {
+      return db('posts').delete().where('posts.id', id)
+      //jump back to routes line 46
+    }
+    
+
+
+
+
+
+
+
+
+
 
 
 

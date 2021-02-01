@@ -30,7 +30,7 @@ router.post('/', (req,res) => {
 
 //Patch route request to update post. Req body includes id, title and para
 router.patch('/:id', (req,res) => {
-  db.updatePost(req.params.id, req.body)
+  db.updatePost(req.params.id, req.body)//form only has title and content
   .then(() => {
   db.getPostById(req.params.id)//reselects updated rec from db
   .then (post => {
@@ -38,8 +38,16 @@ router.patch('/:id', (req,res) => {
   })}
 )}
 )
- //form only has title and content  
-
+  
+//Delete an existing blog post. id provided from url
+router.delete('/:id', (req,res) => {
+  id = req.params.id
+  db.deletePost(id) 
+  .then(() => {
+    res.json({})//returns empty object
+  }
+  )
+})
 
 
 
