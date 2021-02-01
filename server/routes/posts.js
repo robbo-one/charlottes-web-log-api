@@ -15,10 +15,13 @@ router.get('/', (req, res) => {
 // REST JSON API Create Route POST /posts
 router.post('/', (req,res) => {
     const post = req.body
-    console.log(post)
+    post.dateCreated = new Date().toISOString().slice(0, 10)
     db.addPost(post)
       .then(id => {
-        res.json({ id: id })
+        db.getPost(id)
+        .then(post => 
+          res.json(post)
+          )
       })
   })
 
