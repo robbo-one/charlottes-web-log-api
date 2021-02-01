@@ -5,7 +5,8 @@ module.exports = {
   getPosts: getPosts,
   getPost: getPost,
   addPost: addPost,
-  updatePost: updatePost
+  updatePost: updatePost,
+  deletePost: deletePost
 }
 
 function getPosts () {
@@ -29,8 +30,14 @@ function addPost (post) {
 }
 
 function updatePost (id, newPost) {
-  console.log('hello')
+  // console.log('hello')
    return db('posts')
    .where('id', id)
    .update(newPost)
+}
+
+function deletePost (id) {
+  return db('posts')
+    .where('id', id)
+    .delete()
 }

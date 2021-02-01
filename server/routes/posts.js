@@ -62,5 +62,21 @@ router.patch('/:id', (req, res) => {
   })
 })
 
+router.delete('/:id', (req,res) => {
+  db.deletePost(req.params.id)
+    .then(result => {
+      console.log(result)
+      db.getPosts()
+      .then(posts => { 
+        const postData = posts.map(post => {
+          post.paragraphs = JSON.parse(post.paragraphs)
+          return post
+        })    
+        res.json(camelcaseKeys(postData))
+      })
+    })
+})
+
+
 
 module.exports = router
