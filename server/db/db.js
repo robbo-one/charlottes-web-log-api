@@ -7,7 +7,9 @@ module.exports = {
   addPost: addPost,
   updatePost: updatePost,
   deletePost: deletePost,
-  getComments: getComments
+  getComments: getComments,
+  addComment: addComment,
+  editComment: editComment
 }
 
 function getPosts () {
@@ -47,5 +49,19 @@ function getComments(id) {
   return db('comments')
   .where('post_id', id)
   .select()
+}
 
+function addComment(postId, newComment) {
+  return db('comments')
+    .insert({
+      "post_id": postId,
+      "date_posted": new Date(),
+      "comment": newComment.comment 
+    })
+}
+
+function editComment(commentId, newComment) {
+  return db('comments')
+    .where('id', commentId)
+    .update(newComment)
 }

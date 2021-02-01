@@ -88,6 +88,21 @@ router.get('/:id/comments', (req,res) => {
   })
 }) 
 
+router.post('/:id/comments', (req,res) => {
+  const newComment = req.body
+  db.addComment(req.params.id, newComment)
+    .then(id => {
+      db.getComments(req.params.id)
+        .then(comments => {
+        res.json(camelcaseKeys(comments))
+  })
+    })
+})
+
+
+
+
+
 
 
 module.exports = router
