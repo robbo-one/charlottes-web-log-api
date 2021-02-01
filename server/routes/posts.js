@@ -31,7 +31,13 @@ router.post('/', (req, res) => {
   post.paragraphs = JSON.stringify(post.paragraphs)
   post.date_created = new Date()
   db.addPost(post)
-    .then(id => {
+    .then(id => {then(posts => { 
+      const postData = posts.map(post => {
+        post.paragraphs = JSON.parse(post.paragraphs)
+        return post
+      })    
+      res.json(camelcaseKeys(postData))
+    })
 
 
       db.getPost(id)
@@ -65,17 +71,22 @@ router.patch('/:id', (req, res) => {
 router.delete('/:id', (req,res) => {
   db.deletePost(req.params.id)
     .then(result => {
-      console.log(result)
       db.getPosts()
-      .then(posts => { 
-        const postData = posts.map(post => {
-          post.paragraphs = JSON.parse(post.paragraphs)
-          return post
-        })    
-        res.json(camelcaseKeys(postData))
-      })
+        .then(posts => { 
+          const postData = posts.map(post => {
+            post.paragraphs = JSON.parse(post.paragraphs)
+            return post
+          })    
+          res.json(camelcaseKeys(postData))
+        })
     })
 })
+router.get('/:id/comments', (req,res) => {
+  db.getComments(req.params.id)
+  .then(comments => {
+    res.json(camelcaseKeys(comments))
+  })
+}) 
 
 
 
