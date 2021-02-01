@@ -11,7 +11,6 @@ function addPosts(post, db = connection) {
 }
 
 function getPostId(id, db = connection) {
-  console.log(id)
   return db('Posts')
     .where('Posts.id', id)
     .first()
@@ -32,10 +31,22 @@ function deletePost(id, db = connection) {
     .del()
 }
 
+function getComments(id, db = connection) {
+  return db('Comments')
+    .where('post_id', id)
+}
+
+function addComment(id, db = connection) {
+  return db('Comments')
+    .insert()
+}
+
 module.exports = {
   getPosts,
   addPosts,
   getPostId,
   updatePost,
-  deletePost
+  deletePost,
+  getComments,
+  addComment
 }

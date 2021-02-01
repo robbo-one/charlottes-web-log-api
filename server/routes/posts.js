@@ -54,4 +54,16 @@ router.delete('/:id', (req,res) => {
     })
 })
 
+router.get('/:postId/comments', (req,res) => {
+  const postId = req.params.postId
+  db.getComments(postId)
+    .then(comments => {
+      res.json(camelCase(comments))
+    })
+})
+
+router.post('/:postId/comments', (req,res) => {
+  
+})
+
 module.exports = router
