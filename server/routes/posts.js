@@ -58,4 +58,27 @@ router.get('/:postId/comments', (req, res) => {
   })
 })
 
+router.get('/:postId/comments', (req, res) => {
+  const postId = req.params.postId
+  db.getComments(postId)
+  .then(comments => {
+    res.json(comments)
+  })
+})
+
+router.post('/:postId/comments', (req, res) => {
+  const postId = req.params.postId
+  const comment = req.body.comment
+  db.addComment(comment, postId)
+  .then(id => {
+    db.getComment(id[0])
+        .then(comment =>
+          // console.log(comment)
+          res.json(comment)
+        )
+  })
+})
+
+
+
 module.exports = router

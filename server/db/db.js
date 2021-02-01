@@ -34,11 +34,23 @@ function addPost(post) {
     .select().where("postId", postId)
   }
 
+  function getComment (id) {
+    return db('comments')
+    .where("id", id).first()
+  }
+
+  function addComment (comment, postId) {
+    return db('comments')
+    .insert({comment: comment, postId: postId, datePosted : new Date()})
+  }
+
 module.exports = {
     getBlogPosts,
     addPost,
     updatePost,
     getPost,
     deletePost,
-    getComments
+    getComments,
+    addComment,
+    getComment
 }
