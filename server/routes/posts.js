@@ -33,4 +33,23 @@ router.post('/',(req,res) => {
     })
 })
 
+router.patch('/:id',(req, res) => {
+  const id = req.params.id
+  const post = req.body
+  post.paragraphs = JSON.stringify(post.paragraphs)
+
+  db.updatePost(id, post.title, post.paragraphs)
+  
+  .then(()=> {
+    db.getPost(id)
+    .then(newPost => {
+      console.log(newPost)
+      res.json(toCamelCase(newPost))
+    
+    })
+  })
+})
+
+
+
 module.exports = router

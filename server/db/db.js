@@ -12,13 +12,24 @@ function addPost(post, db = connection) {
 
 function getPost(id, db = connection) {
   return db('posts')
-    .where('posts.id', id)
+    .where('Posts.id', id)
     .first()
+}
+
+function updatePost(id,title,paragraphs, db = connection) {
+  return db('posts')
+  .where('posts.id', id)
+  .update({
+    title: title,
+    paragraphs: paragraphs
+  })
+ 
 }
 
 
 module.exports = {
   getPosts,
   addPost,
-  getPost
+  getPost,
+  updatePost
 }
