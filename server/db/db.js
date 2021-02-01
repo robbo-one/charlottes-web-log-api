@@ -22,18 +22,15 @@ function getPost (id) {
 
 function addPost (post) {
 
-  
+
   return db('posts')
      .insert(post)
      .then(ids => ids[0])
 }
 
-function updatePost (id, post) {
-  console.log ({title: post.title,paragraphs: post.paragraphs})
-  return db('posts')
-    .where('id', id)
-    .update({
-      title: post.title,
-      paragraphs: post.paragraphs
-    })
+function updatePost (id, newPost) {
+  console.log('hello')
+   return db('posts')
+   .where('id', id)
+   .update(newPost)
 }

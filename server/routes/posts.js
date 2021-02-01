@@ -43,21 +43,23 @@ router.post('/', (req, res) => {
 })
 
 router.patch('/:id', (req, res) => {
-  const paragraph = JSON.stringify(req.body.paragraphs)
-  post.date_edited = new Date()
-  const editPost = {
-    title: req.body.title,
-    paragraphs: paragraph
-  }
-  console.log(editPost)
-  db.updatePost(req.params.id, editPost)
-    .then(id => {     
-      db.getPost(id)
-        .then(post => {
-          post.paragraphs = JSON.parse(post.paragraphs)
-          res.json(camelcaseKeys(post))
-        })
-    })
+  const newPost = req.body
+  // console.log(newPost)
+  newPost.paragraphs = JSON.stringify(newPost.paragraphs)
+  newPost.date_created = newPost.dateCreated
+  delete newPost.dateCreated
+  newPost.comment_count = newPost.commentCount 
+  delete newPost.commentCount
+
+  db.updatePost(req.params.id, newPost)
+  .then(result => {
+    db.getPost(req.params.id)
+    .then(post => {
+      post.paragraphs = JSON.parse(post.paragraphs)
+      console.log(post)
+      res.json(camelcaseKeys(post))
+    })     
+  })
 })
 
 
