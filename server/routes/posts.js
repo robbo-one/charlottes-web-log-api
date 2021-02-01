@@ -59,4 +59,13 @@ router.delete('/:id', (req,res) => {
 })
 
 
+router.get('/:postId/comments', (req,res) => {
+  const id = req.params.postId
+  db.getComments(id)
+  .then(comments =>
+    res.json(toCamelCase(comments))
+  )
+  })
+
+
 module.exports = router

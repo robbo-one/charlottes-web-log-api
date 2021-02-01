@@ -31,6 +31,10 @@ function deletePost(id, db = connection){
   .delete()
 }
 
+function getComments(id, db = connection){
+  return db('comments')
+  .where('post_id', id)
+}
 
 
 module.exports = {
@@ -38,5 +42,6 @@ module.exports = {
   addPost,
   getPost,
   updatePost,
-  deletePost
+  deletePost,
+  getComments
 }
