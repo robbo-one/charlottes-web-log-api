@@ -23,29 +23,41 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   const post = req.body
-  console.log(post)
+  post.paragraphs = JSON.stringify(post.paragraphs)
   db.postNewBlog(post)
   .then(id => {
-    res.json({ id: id })
+    db.getPost(id)
+    .then(post => {
+    post.paragraphs = JSON.parse(post.paragraphs)
+    res.json(camelcaseKeys (post)) 
+    })
+
   })
 })
 
-// router.get('/:id', (req, res) => {
-
-// })
-
-router.post('/:id', (req, res) => {
+router.patch('/:id', (req, res) => {
   const post = req.body
-  console.log(post)
-  db.updateExisitingBlog(post)
-  .then(Posts => {
-    const updateData = Posts.find((post) => {
-    post.id = JSON.parse(post.paragraphs)
-    return post
+  const id = req.params.id
+  post.paragraphs = JSON.stringify(post.paragraphs)
+  db.updateExisitingBlog(id, post)
+  .then(() => {
+    db.getPost(id)
+    .then(post => {
+    post.paragraphs = JSON.parse(post.paragraphs)
+    res.json(camelcaseKeys (post))
+    })
   })
-    res.json(camelcaseKeys(updateData))
 })
-})
+
+router.get('/:postId/comments', (req, res) => {
+    const id = req.params.postId
+    db.getComments(id)
+    .then(Comments => {
+      console.log(Comments)
+      res.json(Comments) 
+    })
+    })
+
 
 
 
