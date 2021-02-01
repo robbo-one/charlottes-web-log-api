@@ -7,7 +7,7 @@ module.exports = {
   postNewBlog: postNewBlog,
   getPost: getPost,
   updateExisitingBlog: updateExisitingBlog,
-  getComments, getComments,
+  getComments: getComments,
 
 }
 
