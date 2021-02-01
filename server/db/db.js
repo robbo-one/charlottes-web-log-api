@@ -3,7 +3,9 @@ const db = require('knex')(config)
 
 module.exports = {
   getPosts: getPosts,
-  addPost: addPost
+  getPost: getPost,
+  addPost: addPost,
+  updatePost: updatePost
 }
 
 function getPosts () {
@@ -11,9 +13,27 @@ function getPosts () {
     .select()
 }
 
+function getPost (id) {
+  return db('posts')
+    .where('id', id)
+    .select()
+    .first()
+}
+
 function addPost (post) {
+
+  
   return db('posts')
      .insert(post)
-    //  .then(ids => ids)
+     .then(ids => ids[0])
+}
 
+function updatePost (id, post) {
+  console.log ({title: post.title,paragraphs: post.paragraphs})
+  return db('posts')
+    .where('id', id)
+    .update({
+      title: post.title,
+      paragraphs: post.paragraphs
+    })
 }
