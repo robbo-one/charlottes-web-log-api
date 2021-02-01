@@ -46,5 +46,39 @@ router.patch('/:id', (req, res) => {
   })
 })
 
+router.delete('/:id', (req, res) => {
+  const id = req.params.id
+  db.deletePost(id)
+  .then(() => {
+    // res.json({})
+    res.sendStatus(200)
+  })
+})
+
+router.get('/:postId/comments', (req, res) => {
+  const postId = req.params.postId
+  db.getComments(postId)
+  .then(comments => {
+    res.json(camelCase(comments))
+  })
+})
+
+router.post('/:postId/comments', (req, res) => {
+  const postId = req.params.postId
+  const comment = req.body.comment
+  // console.log(comment)
+  db.addComment(postId, comment)
+  .then(id => {
+    db.getComment(id[0])
+    .then(comment => {
+      res.json(camelCase(comment))
+    })
+  })
+
+})
+
+
+
+
 module.exports = router
 
