@@ -23,8 +23,6 @@ function getPosts (db = connection) {
     })
   }//jumps to .then in routes
 
-
-
   //Add a new blog post and return newly created post. Title and para given, id, date and comment count automatically added. Inbound to database so use stringify.
     function addPost(post, db = connection) {
       console.log(post)
@@ -60,11 +58,15 @@ function getPosts (db = connection) {
 
     function deletePost(id, db = connection) {
       return db('posts').delete().where('posts.id', id)
-      //jump back to routes line 46
+      //jumps back to routes line 46
     }
     
 
-
+//Retrieve comments for a particular blog post
+function getComments(id, db = connection) {
+    return db('posts').select().where('posts.id', id)
+    //jumps to routes
+}
 
 
 

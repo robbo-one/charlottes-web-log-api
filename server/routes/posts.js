@@ -49,6 +49,14 @@ router.delete('/:id', (req,res) => {
   )
 })
 
+//Get comments from a particular blog post
+router.get('/', (req, res) => {
+  id = req.params.id
+  db.getComments
+
+
+})
+
 
 
 
