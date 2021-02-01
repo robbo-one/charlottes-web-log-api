@@ -26,14 +26,33 @@ router.post('/', (req,res) => {
   })
 
 
-  router.post('/:id', (req,res) => {
+  router.patch('/:id', (req,res) => {
+
+    //this selects the id from the url
     const id = req.params.id
     const post = req.body
+
+    //we are updating the post which has the same ID as the url and updating that post with the info from req.body
     db.updatePost(id, post)
+    //what is returned after .then is the amount of objects update which is 1, but IDGAF about that number, I just want to return the post which is updated
       .then(post => {
-        res.json({ post: post })
+        // we still have the id of the post we updated (req.params.id) so we just want to return the post which was updated by searching for that ID
+        db.getPost(id)
+        .then(post => {
+          //then we send the updated post as json
+          res.json(post)
+        })
       })
   })
 
+  
+  router.post('/:id', (req,res) => {
 
+    const id = req.params.id
+
+    db.deletePost(id)
+      .then(post => {
+        res.json("OK")
+      })
+  })
 module.exports = router

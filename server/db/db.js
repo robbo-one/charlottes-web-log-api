@@ -6,7 +6,7 @@ function getBlogPosts () {
 }
 
 function getPost (id) {
-  return db('posts').select().where("id", id)
+  return db('posts').select().where("id", id).first()
 }
 
 function addPost(post) {
@@ -16,15 +16,22 @@ function addPost(post) {
   }
 
   function updatePost(id, post) {
+    post.paragraphs = JSON.stringify(post.paragraphs)
     return db('posts')
     .where("id", id)
-    .update({post: post})
-      .then(post => post[0])
+    .update(post)
   }
+
+  function deletePost(id) {
+    return db('posts')
+    .delete().where("id", id)
+  }
+
 
 module.exports = {
     getBlogPosts,
     addPost,
     updatePost,
-    getPost
+    getPost,
+    deletePost
 }
