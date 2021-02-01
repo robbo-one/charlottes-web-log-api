@@ -21,18 +21,37 @@ router.post('/', (req,res) => {
   const post = req.body
   post.paragraphs = JSON.stringify(post.paragraphs)
   post.date_created = new Date()
+
   db.addPosts(post)
     .then(id => {
       db.getPostId(id[0])
       .then(newPost => {
-          console.log(newPost)
           res.json(camelCase(newPost))
         })
     })
 })
 
 router.patch('/:id', (req,res) => {
+  const post = req.body
+  const id = req.params.id
+  post.paragraphs = JSON.stringify(post.paragraphs)
+
+  db.updatePost(id, post.title, post.paragraphs)
+  .then(() => {
+    db.getPostId(id)
+    .then(newPost => {
+        res.json(camelCase(newPost))
+      })
+  })
+})
+
+router.delete('/:id', (req,res) => {
+  const id = req.params.id
   
+  db.deletePost(id)
+    .then(() => {
+      res.json({})
+    })
 })
 
 module.exports = router
