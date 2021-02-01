@@ -68,5 +68,18 @@ router.get('/:postId/comments', (req,res) => {
   )
   })
 
+router.post('/:postId/comments', (req,res) => {
+    const postId = req.params.postId
+    const comment = req.body.comment
+    db.postComment(postId, comment)
+      .then(id => {
+        db.getComment(id[0])
+          .then(comment => {
+            res.json(toCamelCase(comment))
+        })
+    })
+})
+
+
 
 module.exports = router

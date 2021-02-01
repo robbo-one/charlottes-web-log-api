@@ -36,6 +36,17 @@ function getComments(id, db = connection){
   .where('post_id', id)
 }
 
+function postComment(id, comment, db = connection){
+    return db('comments')
+    .insert({post_id: id, comment: comment, date_posted: new Date()})
+}
+
+function getComment(id, db = connection) {
+    return db('comments')
+    .where('id', id)
+    .first()
+}
+
 
 module.exports = {
   getPosts,
@@ -43,5 +54,8 @@ module.exports = {
   getPost,
   updatePost,
   deletePost,
-  getComments
+  getComments,
+  postComment,
+  getComment
+
 }
