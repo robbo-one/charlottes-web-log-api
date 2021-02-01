@@ -5,11 +5,12 @@ function getPosts () {
   return db('posts').select()
 }
 
-function addPost(title,paragraphs) {
+function addPost(post) {
+  post.paragraphs = JSON.stringify(post.paragraphs)
   return db('posts')
-  .insert({title: title,paragraphs: paragraphs})
-  // .then(() => {
-  //   console.log(title, paragraphs)
+  .insert(post)
+   .then(ids => ids[0]) //{
+    // console.log(title, paragraphs, date)
   // })
 }
 
@@ -22,8 +23,16 @@ function getPost(id) {
   // })
 }
 
+function editPost(id, post) {
+  post.paragraphs = JSON.stringify(post.paragraphs)
+  return db('posts')
+  .where("id", id)
+  .update(post)
+}
+
 module.exports = {
   getPosts,
   addPost,
-  getPost
+  getPost,
+  editPost
 }

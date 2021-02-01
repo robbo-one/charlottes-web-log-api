@@ -73,22 +73,23 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  let obj = {
-    title: req.body.title,
-    paragraphs: req.body.paragraphs,
-  };
+  // let obj = {
+  //   title: req.body.title,
+  //   paragraphs: req.body.paragraphs,
+  // };
   
 
-  db.addPost(obj.title, JSON.stringify(obj.paragraphs))
+  db.addPost(req.body)
     .then(id=> {
       console.log("id= "+id)
       db.getPost(id)
       .then(post => {
-        console.log("post= "+post)
+        // console.log("post= "+{post})
         res.json(post)
       })
     })
 
+});
   
   // console.log(obj.title)
   // console.log(req.body)
@@ -98,10 +99,16 @@ router.post("/", (req, res) => {
   //   console.log("there is this many arrays", i)
   // }
 
-});
 
 router.patch("/:id", (req, res) => {
-  res.json();
+  db.editPost(req.params.id, req.body)
+    .then(howManyThingsUpdated=>{
+      db.getPost(req.params.id)
+        .then(post=> {
+          res.json(post);
+
+        })
+    })
 });
 
 router.delete("/:id", (req, res) => {
@@ -109,6 +116,10 @@ router.delete("/:id", (req, res) => {
 });
 
 router.get("/:postId/comments", (req, res) => {
+  db.getCommentsForPost(req.params.id)
+    .then(()=> {
+      
+    })
   res.json();
 });
 
