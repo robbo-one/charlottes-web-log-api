@@ -28,12 +28,17 @@ function addPost(post) {
     return db('posts')
     .delete().where("id", id)
   }
-
+  
+  function getComments (postId) {
+    return db('comments')
+    .select().where("postId", postId)
+  }
 
 module.exports = {
     getBlogPosts,
     addPost,
     updatePost,
     getPost,
-    deletePost
+    deletePost,
+    getComments
 }
