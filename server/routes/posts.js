@@ -8,6 +8,7 @@ const router = express.Router()
 // REST JSON API Index Route GET /posts
 //  /v1/posts
 
+//No req, just a response
 router.get('/', (req,res) => {
   db.getPosts()
     .then(posts => {
@@ -16,6 +17,7 @@ router.get('/', (req,res) => {
     })
 })
 
+//req is in req body
 router.post('/', (req,res) => {
   db.addPost(req.body)
     .then(id => {
@@ -25,6 +27,18 @@ router.post('/', (req,res) => {
     })
 })
 })
+
+//Patch route request to update post. Req body includes id, title and para
+router.patch('/:id', (req,res) => {
+  db.updatePost(req.params.id, req.body)
+  .then(() => {
+  db.getPostById(req.params.id)//reselects updated rec from db
+  .then (post => {
+    res.json(post)
+  })}
+)}
+)
+ //form only has title and content  
 
 
 
