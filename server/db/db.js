@@ -6,7 +6,9 @@ function getBlogPosts () {
 }
 
 function getPost (id) {
+
   return db('posts').select().where("id", id).first()
+
 }
 
 function addPost(post) {
