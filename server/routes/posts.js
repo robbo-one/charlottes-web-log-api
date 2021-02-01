@@ -18,19 +18,21 @@ router.get('/', (req, res) => {
       })
       
       res.json(posts)
-
-      //  posts.map(p => {return (p.paragraphs)} )
-      // console.log(paragraphsCollection)
-      // res.json(camelCase(JSON.parse(paragraphsCollection)));
     });
 });
 
-// router.post('/', (req, res) => {
-//   const post = req.body;
-//   db.addPost(post)
-//     .then(id => {
-//       res.json({ id: id });
-//     });
-// });
+
+router.post('/', (req, res) => {
+  const post = req.body;
+  post.paragraphs = JSON.stringify(post.paragraphs)
+  post.date_created = new Date()
+  db.addPost(post)
+    .then(id => {
+      db.getPostById(id[0])
+      .then(newPost => {
+      res.json(camelCase(newPost))
+    });
+  })
+});
 
 module.exports = router
